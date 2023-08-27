@@ -12,16 +12,15 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
-apply plugin: 'maven-publish'
 
-version = '1.19.2-1.0.0'
+version = '1.18.2-1.0.0'
 group = 'com.teampotato.ghostjump'
 archivesBaseName = 'ghostjump'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
-    mappings channel: 'parchment', version: '2022.08.14-1.19.2'
+    mappings channel: 'parchment', version: '2022.11.06-1.18.2'
     runs {
         client {
             workingDirectory project.file('run')
@@ -74,9 +73,9 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.2-43.2.14'
-    implementation fg.deobf("curse.maven:the-graveyard-forge-531188:4555242")
-    implementation fg.deobf("curse.maven:geckolib-388172:4573048")
+    minecraft 'net.minecraftforge:forge:1.18.2-40.2.10'
+    implementation fg.deobf("curse.maven:the-graveyard-forge-531188:4555245")
+    implementation fg.deobf("curse.maven:geckolib-388172:4181370")
 }
 
 jar {
@@ -91,16 +90,3 @@ jar {
 }
 
 jar.finalizedBy('reobfJar') 
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
-        }
-    }
-}

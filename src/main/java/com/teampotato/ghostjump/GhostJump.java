@@ -11,10 +11,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import org.apache.commons.lang3.RandomUtils;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 @Mod(GhostJump.ID)
-@Mod.EventBusSubscriber()
+@Mod.EventBusSubscriber
 public class GhostJump {
     public static final String ID = "ghostjump";
 
@@ -35,12 +36,12 @@ public class GhostJump {
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         if (event.isCanceled()) return;
         BlockPos pos = event.getPos();
-        Level level = event.getLevel();
+        Level level = event.getWorld();
         if (!(level.getBlockState(pos).getBlock() instanceof AbstractCoffinBlock<?>)) return;
         MinecraftServer server = level.getServer();
         if (server == null) return;
-        if (RandomUtils.nextInt(0, 101) > chance.get()) return;
-        server.getCommands().performPrefixedCommand(
+        if (ThreadLocalRandom.current().nextInt(0, 101) > chance.get()) return;
+        server.getCommands().performCommand(
                     server.createCommandSourceStack().withSuppressedOutput(),
                     "execute in " + level.dimension().location() + " run summon " + entity + " " + pos.getX() + " " + (pos.getY() + 1) + " " + pos.getZ()
             );
