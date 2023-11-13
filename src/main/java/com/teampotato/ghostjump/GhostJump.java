@@ -42,9 +42,10 @@ public class GhostJump {
         if (RandomUtils.nextInt(0, 101) > chance.get()) return;
         server.getCommands().performPrefixedCommand(
                     server.createCommandSourceStack().withSuppressedOutput(),
-                    "execute in " + level.dimension().location() + " run summon " + entity + " " + pos.getX() + " " + (pos.getY() + 1) + " " + pos.getZ()
+                    "execute in " + level.dimension().location() + " run summon " + entity.get() + " " + pos.getX() + " " + (pos.getY() + 1) + " " + pos.getZ()
             );
     }
+
 
     public GhostJump() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, configSpec);
